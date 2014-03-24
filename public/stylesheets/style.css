@@ -1,0 +1,45 @@
+html {
+    background: url("/images/pattern-1hrt.png");
+}
+
+body {
+    background: url("/images/pattern-1hrt.png");
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+/*Principal container*/
+#container {
+    position: relative;
+    padding: 20px;
+    width: 1024px;
+    margin: 0 auto;
+    background: white;
+    height: 100vh;
+}
+
+/*All the 'add new' buttons*/
+#btnNewBlog, #btnNewTag, #btnNewAuthor {
+    position: absolute;
+    right: 20px;
+    top: 50px;
+}
+
+/*Icons for the titles*/
+#titleBlog {
+    background: url("/images/blog.png") no-repeat;
+    padding-left: 35px;
+}
+
+#titleTag {
+    background: url("/images/tag.png") no-repeat;
+    padding-left: 35px;
+}
+
+#titleAuthor {
+    background: url("/images/authors.png") no-repeat;
+    padding-left: 35px;
+}

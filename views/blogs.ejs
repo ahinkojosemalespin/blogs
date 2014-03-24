@@ -1,0 +1,126 @@
+<div ng-controller="blogsCtrl">
+	<script src="/javascripts/blogs.js" type="text/javascript"></script>
+	<% layout('layout.ejs') %>
+	<div ng-init="loadBlogs()">
+	    <h1 id="titleBlog">Blogs</h1>
+	    <!-- Button trigger modal -->
+	    <a id="btnNewBlog" data-toggle="modal" href="#modalNewBlog" class="btn btn-primary btn-lg">Add new blog</a>
+	    <p>This is a list of all the blogs available</p>
+	    <table id="blogsTable" class="table">
+	        <thead>
+	            <tr>
+	                <th>Blog title</th>
+	                <th>Author</th>
+	                <th>Date</th>
+	                <th>Web</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        	<!-- List of all the blogs -->
+	            <tr data-toggle="modal" data-idblog="{{blog.idblog}}" href="#modalViewBlog" ng-repeat="blog in blogs">
+	                <td>{{blog.blogtitle}}</td>
+	                <td data-idauthor="{{blog.idauthor}}">{{blog.firstname + " " + blog.lastname}}</td>
+	                <td>{{blog.dateblog | date:'MM-dd-yyyy'}}</td>
+	                <td><a href="http://{{blog.urlblog}}" target="_blank">{{blog.urlblog}}</a></td>
+	            </tr>
+	        </tbody>
+	    </table>
+	</div>
+
+	<!-- Modal to create a new blogf -->
+	<div class="modal fade" id="modalNewBlog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">New Blog</h4>
+	            </div>
+	            <div class="modal-body">
+	                <form role="form">
+	                    <div class="form-group">
+	                        <label for="exampleInputEmail1">Title</label><input class="form-control" id="txtBlogTitle" placeholder="" type="text" ng-model="dataBlog.blogtitle">
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="exampleInputPassword1">Select author</label>
+	                        <select id="selectAuthor" class="form-control">
+	                        	<option ng-repeat="author in authors" value={author.firstname}>{{author.idauthor + ". " + author.firstname + " " + author.lastname}}</option>
+	                        </select>
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="exampleInputPassword1">Blog URL</label><input class="form-control" id="txtBlogUrl" placeholder="www.myblog.com" type="text" ng-model="dataBlog.url">
+	                    </div>
+	                </form>
+	            </div>
+	            <div class="modal-footer">
+	                <button id="closeNewBlog" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button type="button" ng-click="createBlog()" class="btn btn-primary">Save</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+	<!-- Modal to get the information of the blog-->
+	<div class="modal fade" id="modalViewBlog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">Blog information</h4>
+	            </div>
+	            <div class="modal-body">
+	                <form role="form">
+	                    <div class="form-group">
+	                        <label for="exampleInputPassword1">Change author:</label>
+	                        <select id="selectAuthorMod" class="form-control">
+	                        	<option ng-repeat="author in authors" value="{{author.idauthor}}">{{author.idauthor + ". " + author.firstname + " " + author.lastname}}</option>
+	                        </select>
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="exampleInputPassword1">Tags associated with this blog:</label>
+	                        <select id="tagsModalSave" name="" class="form-control" multiple>
+
+
+							</select>
+							<small>You can delete tags by selecting them and press the DELETE key</small>
+	                    </div>
+	                    <button id="btnSaveBlog" data-toggle="modal" href="#modalTagsBlog" type="submit" ng-click="loadTags()" class="btn btn-default">Add new tag</button>
+	                </form>
+	            </div>
+	            <div class="modal-footer">
+	                <button id="closeModifyBlog" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button type="button" ng-click="modifyBlog()" class="btn btn-primary">Save changes</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+	<!-- Modal to add new tags to a blog-->
+	<div class="modal fade" id="modalTagsBlog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">List of tags</h4>
+	            </div>
+	            <div class="modal-body">
+	                <form role="form">
+	                    <div class="form-group">
+	                        <label for="exampleInputPassword1">Select one or more tags with the CTRL key:</label>
+	                        <select id="tagsModal" name="cars" class="form-control" multiple>
+	
+
+							</select>
+	                    </div>
+	                </form>
+	            </div>
+	            <div class="modal-footer">
+	                <button id="closeAddTagsToBlog" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button type="button" ng-click="addTagsToBlog()" class="btn btn-primary">AddTag(s)</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+</div>

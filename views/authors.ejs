@@ -1,0 +1,55 @@
+<div ng-controller="authorsCtrl">
+	<script src="/javascripts/authors.js" type="text/javascript"></script>
+	<% layout('layout.ejs') %>
+	<div ng-init="loadAuthors()">
+	    <h1 id="titleAuthor">Authors</h1>
+	    <!-- Button trigger modal -->
+	    <a id="btnNewAuthor" data-toggle="modal" href="#modalNewAuthor" class="btn btn-primary btn-lg">Add new author</a>
+	    <p>This is a list of all the authors available</p>
+	    <table class="table">
+	        <thead>
+	            <tr>
+	                <th>First name</th>
+	                <th>Last Name</th>
+	                <th>Email</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr ng-repeat="author in authors">
+	                <td>{{author.firstname}}</td>
+	                <td>{{author.lastname}}</td>
+	                <td>{{author.email}}</td>
+	            </tr>
+	        </tbody>
+	    </table>
+	</div>
+
+	<!-- Modal to create a new author -->
+	<div class="modal fade" id="modalNewAuthor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">New author</h4>
+	            </div>
+	            <div class="modal-body">
+	                <form role="form">
+	                    <div class="form-group">
+	                        <label for="txtAuthorFirstName">First mame:</label><input class="form-control" id="txtAuthorFirstName" placeholder="Enter email" type="text" ng-model="dataAuthor.firstname">
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="txtAuthorLastName">Last mame:</label><input class="form-control" id="txtAuthorLastName" placeholder="Enter email" type="text" ng-model="dataAuthor.lastname">
+	                    </div>
+	                    <div class="form-group">
+	                        <label for="txtAuthorEmail">Email</label><input class="form-control" id="txtAuthorEmail" placeholder="Password" type="text" ng-model="dataAuthor.email">
+	                    </div>
+	                </form>
+	            </div>
+	            <div class="modal-footer">
+	                <button id="closeNewAuthor" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <button type="button" ng-click="createAuthor()" class="btn btn-primary">Save</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>
